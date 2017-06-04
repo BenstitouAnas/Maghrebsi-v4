@@ -29,7 +29,7 @@ class CreateUtilisateurProTable extends Migration
             $table->integer('role_id')->default(1);
             $table->integer('superieur')->default(0);
             $table->integer('typeUser')->default(1);
-            $table->string('etat')->default('En Attente Confirmation');
+            $table->string('etat')->default('Attente');
             $table->timestamps();
         });
     }
