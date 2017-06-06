@@ -10,8 +10,9 @@
 	
 		<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-	<link href="{{asset('assets/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/icons/fontawesome/styles.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/core.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
@@ -97,9 +98,17 @@
 							<div class="media">
 								<a href="#" class="media-left"><img src="{{asset('./assets/images/placeholder.jpg')}}" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
-									<span class="media-heading text-semibold">BENSTITOU Anas</span>
+									<span class="media-heading text-semibold">{{Auth::user()->nom }} {{Auth::user()->prenom }}</span>
 									<div class="text-size-mini text-muted">
-										Administrateur
+										@if (Auth::user()->typeUser == 0)
+											Administareur
+										@endif
+										@if (Auth::user()->typeUser == 1)
+											Commerciale
+										@endif
+										@if (Auth::user()->typeUser == 2)
+											Préstataire
+										@endif
 									</div>
 								</div>
 							</div>
@@ -114,30 +123,35 @@
 							<ul class="navigation navigation-main navigation-accordion">
 								<!-- Main -->
 								<li class="navigation-header"><span>Navigation</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li><a href="{{ url('/admin') }}"><i class="icon-home4"></i> <span>Acceuil</span></a></li>
+								<li><a href="{{ url('/Commerciales') }}"><i class="fa fa-home"></i> <span>Acceuil</span></a></li>
 
 								<li>
-									<a href="#"><i class="icon-stack2"></i> <span>Roles</span></a>
-									<ul>
-										<li><a href="{{ url('/admin/RolesCapacites') }}">Gestion Roles</a></li>
-										<li><a href="{{ url('/admin/Capacites') }}">Gestion Capacite</a></li>
-									</ul>
+									<a href=""><i class="fa fa-sitemap"></i> <span>Équipe</span></a>
 								</li>
 
 								<li>
-									<a href="#"><i class="icon-stack2"></i> <span>Commerciaux</span></a>
-									<ul>
-										<li><a href="{{ url('/admin/Commerciales') }}">Liste Commerciaux</a></li>
-										<li><a href="{{ url('/admin/DemandesCommerciales') }}">Demandes</a></li>
-									</ul>
+									<a href=""><i class="fa fa-users"></i> <span class="nav-label">Clients </span></a>
 								</li>
 
 								<li>
-									<a href="#"><i class="icon-coins"></i> <span>Prestataires</span></a>
-									<ul>
-										<li><a href="{{ url('/admin/Prestataires') }}">Liste Prestataires</a></li>
-									</ul>
+									<a href=""><i class="fa fa-table"></i> <span class="nav-label">Produits</span></a>
 								</li>
+
+								<li>
+									<a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">Commandes</span></a>
+								</li>
+
+								<li>
+									<a href="#"><i class="fa fa-money"></i> <span class="nav-label">Solde </span><span class="fa arrow"></span></a>
+
+									<ul class="nav nav-second-level collapse">
+										<li><a href="">Mon Solde</a></li>
+										<li><a href="">Historique</a></li>
+										<li><a href="{{ url('/Commerciales/DemandesRetrait') }}">Demande Retrait</a></li>
+									</ul>
+
+								</li>
+
 							</ul>
 						</div>
 					</div>
@@ -152,18 +166,15 @@
 			<div class="content-wrapper">
 
 				<!-- Page header -->
-				<div class="page-header">
-					<div class="page-header-content">
-						<div class="page-title">
-							<h4><span class="text-semibold">Components</span> - Alerts</h4>
-						</div>
+				<div class="page-header" style="margin: 5px 2px 5px 2px;">
+					<div class="page-header-content" >
 					</div>
 
 					<div class="breadcrumb-line breadcrumb-line-component">
 						<ul class="breadcrumb">
-							<li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-							<li><a href="#">Components</a></li>
-							<li class="active">Alerts</li>
+							<li><a href="{{ url('/Commerciales') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+							<li><a href="#">@yield('path1')</a></li>
+							<li class="active">@yield('path2')</li>
 						</ul>
 					</div>
 				</div>

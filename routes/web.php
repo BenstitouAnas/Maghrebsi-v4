@@ -19,8 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::get('admin', function () {
+    return view('admin.home');
+});
+
+Route::get('admin/admin', function () {
     return view('admin.home');
 });
 
@@ -48,16 +51,19 @@ Route::get('admin/CapaciteByID/{x}','RoleCapaciteController@getCapaciteByID');
 
 // Routes pour la gestion des prestataires
 
-Route::get('admin/PrestatairesData','PrestataireController@Prestataires');
 
-Route::get('admin/Prestataires','PrestataireController@showPrestataires');
-Route::post('admin/PrestataireAdd','PrestataireController@addPrestataire');
-Route::post('admin/PrestataireDelete','PrestataireController@deletePrestataire');
+       
+Route::get('admin/PrestatairesData','PrestataireController@Prestataires')->middleware('auth');
 
-Route::post('admin/PrestataireUpdate','PrestataireController@updatePrestataire');
-Route::get('admin/PrestataireByID/{x}','PrestataireController@getPrestataireByID');
+Route::get('admin/Prestataires','PrestataireController@showPrestataires')->middleware('auth');
+Route::post('admin/PrestataireAdd','PrestataireController@addPrestataire')->middleware('auth');
+Route::post('admin/PrestataireDelete','PrestataireController@deletePrestataire')->middleware('auth');
 
-Route::post('admin/PrestataireSendEmail','PrestataireController@PrestataireSendEmail');
+Route::post('admin/PrestataireUpdate','PrestataireController@updatePrestataire')->middleware('auth');
+Route::get('admin/PrestataireByID/{x}','PrestataireController@getPrestataireByID')->middleware('auth');
+
+Route::post('admin/PrestataireSendEmail','PrestataireController@PrestataireSendEmail')->middleware('auth');
+
 
 // Routes pour la gestion des commerciales
 
@@ -75,4 +81,23 @@ Route::post('admin/CommercialeConfirme','CommercialeController@CommercialeConfir
 
 Route::get('admin/DemandesCommerciales','CommercialeController@showDemandesCommerciales');
 Route::get('admin/DemandesData','CommercialeController@Demandes');
+
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+Route::get('/Commerciales', function () {
+    return view('commerciale.home');
+});
+
+Route::get('/Commerciales/DemandesRetrait','SoldeController@DemandesRetrait');
+
+Route::post('/Commerciales/DemanderRetrait','SoldeController@DemanderRetrait');
+
+/*Route::get('/Commerciales/DemanderRetrait', function () {
+    return view('commerciale.demanderetrait');
+});*/
+
+
 

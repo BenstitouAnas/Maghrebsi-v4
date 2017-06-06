@@ -16,7 +16,7 @@
   <!-- Basic datatable -->
   <div class="panel panel-flat">
       <div class="panel-heading">
-          <h6 class="panel-title">Stock</h6>
+          <h6 class="panel-title">Roles</h6>
           <div class="heading-elements">
       			<ul class="icons-list">
       				<li><a data-action="collapse"></a></li>
